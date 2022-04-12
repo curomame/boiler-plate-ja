@@ -1,14 +1,31 @@
-const mongoose = require("mongoose");
-const bcrypt = require('bcrypt')
+//기존문법
+// const mongoose = require("mongoose");
+
+//es6형식으로 변경 - mongoose에서 적혀있는 방법임
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
+
+//bcrypt 암호화를 하기 위해 사용하는 모듈
+// const bcrypt = require('bcrypt')
+import bcrypt from 'bcrypt'
 const saltRounds = 10;
-const jwt = require('jsonwebtoken');
+
+//jwt는 존왓탱인줄 알았는데 제이슨 웹 토큰 - 토큰만들어서 너인지 아닌지 확인하는것
+
+import jwt from 'jsonwebtoken'
 
 //salt 이용해서 암호화 해야함
 //그러려면 salt를 먼저 생성해야함
 //salt rounds라는 것은 salt가 몇글자인지 10자리인 salt를 만들어서 암호화 진행
 
-const userSchema = mongoose.Schema({
+//몽구스를 시작하면 스키마 설정부터 해줘야함
+//mongo db 의 데이터 베이스 형식이 이러한데, 
 
+// 기존 강의 방식
+// const userSchema = mongoose.Schema({
+
+//새로운 방식
+const userSchema = new Schema ({
   name : {
     type:String,
     maxlength: 50
@@ -117,4 +134,6 @@ userSchema.statics.findByToken = function (token, cb) {
 
 const User = mongoose.model('User',userSchema)
 
-module.exports = { User }
+export default User;
+
+// module.exports = { User }

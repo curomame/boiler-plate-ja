@@ -1,12 +1,17 @@
-const express = require('express')
-const mongoose = require('mongoose')
+import express from 'express'
+import mongoose from 'mongoose'
+
 const app = express()
 const port = 5000
 
-const config = require('./config/key');
-const cookieParser = require('cookie-parser')
-const { auth } = require('./middleware/auth')
-const {User} = require("./models/User")
+import dotenv from 'dotenv';
+dotenv.config();
+// let config = 'mongodb+srv://lee:abcd1234@boilerplate.lezfq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+import cookieParser from 'cookie-parser'
+import auth from './middleware/auth.js'
+
+import User from './models/User.js'
 
 //aplication / x-ww/form/urlencoded
 app.use(express.json()) //For JSON requests
@@ -16,7 +21,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(cookieParser());
 
-mongoose.connect(config.mongoURI)
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MONGODB connected'))
   .catch(err => console.log(err))
 

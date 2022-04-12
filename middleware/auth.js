@@ -1,4 +1,4 @@
-const { User } = require('../models/User')
+import User from '../models/User.js'
 
 let auth = (req,res,next)=>{
 
@@ -25,4 +25,6 @@ let auth = (req,res,next)=>{
   //유저가 없으면 인증 엑스
 }
 
-module.exports = { auth };
+export default auth;
+
+// module.exports = { auth };
